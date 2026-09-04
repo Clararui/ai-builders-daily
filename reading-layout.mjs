@@ -1,0 +1,38 @@
+// Keep source content and existing illustrations; replace the presentation shell.
+export function readingLayout(html){
+ if(html.includes('id="reading-layout"'))return html;
+ const sections=[...html.matchAll(/<section class="slide[\s\S]*?<\/section>/g)].map((m,i)=>m[0].replace(/<section class="[^"]*"[^>]*>/,`<section class="slide" id="slide-${i+1}">`).replaceAll('右侧本条摘要','本条摘要'));
+ if(!sections.length)throw Error('No readable sections');
+ const head=html.slice(0,html.indexOf('</head>'));
+ return head+`<style id="reading-layout">
+ html,body{width:100%;height:auto;overflow:visible;background:#f8f4eb;color:#252720;scroll-behavior:smooth}
+ body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif}
+ *,*::before,*::after{box-sizing:border-box}
+ .reading-header{max-width:1100px;margin:auto;padding:24px 28px;display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #d9d4c8;font-size:15px}
+ .reading-header a{color:#315c49;text-decoration:none;padding:6px 0}
+ main{max-width:1100px;margin:auto;padding:0 28px}
+ .slide,.slide.active,.slide.visible{position:relative;inset:auto;width:100%;height:auto;min-height:0;display:block;visibility:visible;opacity:1;pointer-events:auto;overflow:visible;background:transparent;padding:44px 0;border-bottom:1px solid #cfc8b9;scroll-margin-top:16px}
+ .paper{position:relative;inset:auto;padding:0;overflow:visible;box-shadow:none;background:transparent;width:auto;height:auto}
+ .paper::before,.holes,.tabs{display:none}
+ .reveal{opacity:1;transform:none;transition:none}
+ .mast{font:500 14px/1.5 system-ui;letter-spacing:0;border:0;padding:0;color:#637267;gap:16px}
+ .mast span{white-space:nowrap}
+ h2{font:750 clamp(28px,4vw,42px)/1.3 system-ui;letter-spacing:-.025em;margin:16px 0 24px;max-width:900px}
+ .story{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;margin:0}
+ .story>*{min-width:0}
+ .quote{font:650 20px/1.6 system-ui;border-left:3px solid #8aa990;padding-left:14px;margin:0 0 18px}
+ .explainer,.comic{margin:0;padding:12px;background:#efeade;border:0;border-radius:12px;width:100%;height:auto;min-height:0}
+ .explainer svg,.comic svg{display:block;width:100%;height:auto;max-height:none}
+ .explainer figcaption,.comic figcaption{font:500 15px/1.65 system-ui;margin:8px 0 0}
+ .scene-note{font:400 12px/1.6 system-ui;margin:8px 0 0;color:#777}
+ .analysis{font:400 18px/1.9 system-ui;color:#333a33;overflow-wrap:anywhere}
+ .analysis p{font-size:inherit;line-height:inherit;margin:0 0 18px}.analysis p+p{margin-top:0}
+ .reading-note{padding:18px;margin:24px 0 0;border:0;border-left:3px solid #8aa990;background:#edeedf;font-size:16px;line-height:1.8}
+ .reading-note p{font-size:16px;margin:8px 0 0}
+ .links{gap:12px;margin-top:22px}.source{font:600 15px/1.6 system-ui;padding:10px 14px;border:1px solid #ccd4c9;border-radius:8px;color:#315c49;background:#f7faf3;max-width:100%;overflow-wrap:anywhere}
+ .page-tag{position:static;font:400 12px/1.7 system-ui;margin-top:24px;color:#777;overflow-wrap:anywhere}
+ .reading-footer{max-width:1100px;margin:auto;padding:32px 28px 56px;font-size:14px}.reading-footer a{color:#315c49}
+ @media(max-width:700px){.reading-header{padding:16px 20px}main{padding:0 20px}.slide{padding:30px 0 36px}.story{display:flex;flex-direction:column;gap:24px}h2{font-size:29px;margin:14px 0 22px}.quote{font-size:18px}.analysis{font-size:18px;line-height:1.9}.explainer{padding:10px}.page-tag{margin-top:22px}}
+ @media print{html,body{width:auto;height:auto}.slide{width:auto;height:auto;break-after:auto}.reading-header,.reading-footer{display:none}}
+ </style></head><body><header class="reading-header"><strong>AI Builders 日报</strong><a href="../index.html">往期归档 ↗</a></header><main>${sections.join('\n')}</main><footer class="reading-footer"><a href="../index.html">浏览全部往期 →</a></footer></body></html>`;
+}
