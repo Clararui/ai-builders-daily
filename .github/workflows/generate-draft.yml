@@ -1,5 +1,11 @@
 name: Generate daily draft
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      test_only_urls:
+        description: 'Optional comma-separated source URLs for regression tests only'
+        required: false
+        default: ''
 permissions:
   contents: read
 jobs:
@@ -22,6 +28,8 @@ jobs:
           curl -fL --retry 2 --max-time 1200 -o runtime/model.gguf https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf
           echo 'd98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785  runtime/model.gguf' | sha256sum -c -
       - name: Generate Chinese draft without publishing
+        env:
+          TEST_ONLY_URLS: ${{ inputs.test_only_urls }}
         run: node draft.mjs runtime/feed.json runtime/llama-b10621/llama-completion runtime/model.gguf draft-output
       - uses: actions/upload-artifact@v4
         if: always()
