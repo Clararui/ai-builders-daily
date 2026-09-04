@@ -1,5 +1,6 @@
 // Reuse the user's approved v3 style and scene library; never run model HTML.
 import {readFile,writeFile} from 'node:fs/promises';
+import {readingLayout} from './reading-layout.mjs';
 const [draftFile,templateFile,output]=process.argv.slice(2);
 const draft=JSON.parse(await readFile(draftFile,'utf8'));
 const template=await readFile(templateFile,'utf8');
@@ -38,4 +39,4 @@ const start=template.indexOf(sections[0]),end=template.indexOf(sections.at(-1))+
 let html=template.slice(0,start).replaceAll('2026-09-04',day)+slides+template.slice(end).replaceAll('2026-09-04',day);
 html=html.replace(/<title>.*?<\/title>/,'<title>AI 日报 · '+day+' · 自动生成草稿</title>');
 if(process.env.PUBLICATION==='true')html=html.replaceAll('自动生成草稿','自动整理');
-await writeFile(output,html);
+await writeFile(output,readingLayout(html));
