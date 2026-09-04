@@ -27,5 +27,5 @@ jobs:
         if: always()
         with:
           name: daily-draft
-          path: draft-output/draft.json
+          path: draft-output/*.json
           retention-days: 3
