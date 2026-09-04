@@ -6,6 +6,14 @@ const {mkdirSync}=require('node:fs');
  const page=await browser.newPage({viewport:{width:1280,height:720}});
  await page.goto('file://'+resolve(process.argv[2]));await page.waitForTimeout(1000);
  const count=await page.locator('.slide').count();
+ if(await page.locator('#reading-layout').count()){
+  for(const width of [390,1280]){
+   await page.setViewportSize({width,height:844});
+   const ok=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1&&[...document.querySelectorAll('.slide')].every(s=>s.getBoundingClientRect().height>0)&&parseFloat(getComputedStyle(document.querySelector('.analysis')).fontSize)>=16);
+   if(!ok)throw Error('Reading layout failed at '+width);
+  }
+  console.log('Verified responsive reading layout: '+count+' articles');await browser.close();return;
+ }
  for(let i=0;i<count;i++){
    await page.evaluate(i=>presentation.showSlide(i),i);await page.waitForTimeout(900);
    const bad=await page.evaluate(()=>{const s=document.querySelector('.slide.active'),foot=s.querySelector('.page-tag').getBoundingClientRect();return [...s.querySelectorAll('.analysis,.visual-column,h2')].filter(e=>e.scrollWidth>e.clientWidth+2||e.getBoundingClientRect().bottom>foot.top).map(e=>e.className);});
