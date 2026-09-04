@@ -17,7 +17,7 @@ export function selectItems(feed, now=new Date(),previousUrls=[]) {
   return {sourceUpdatedAt:new Date(updated).toISOString(),items:items.slice(0,12)};
 }
 export function cleanSummary(raw,source) {
-  const text=raw.replace(/\[end of text\]\s*$/,'').trim();
+  const text=raw.replace(/\[end of text\]\s*$/,'').replace(/\binfluencers?\b/gi,'博主').trim();
   if(text.length<15||text.length>500||/[<>]|https?:\/\//.test(text)||(text.match(/[\u3400-\u9fff]/g)||[]).length<12)throw Error('摘要格式不合格');
   if(/\bif\b/i.test(source)&&!/[如若倘]|假设/.test(text))throw Error('摘要丢失条件语气');
   if(/\b(not yet|isn.t.*yet)\b/i.test(source)&&!/[未没]|还不/.test(text))throw Error('摘要丢失未上线限制');
