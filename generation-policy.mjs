@@ -10,6 +10,7 @@ export function selectItems(feed, now=new Date()) {
       if(!['x.com','twitter.com'].includes(u.hostname)||!/^\/[^/]+\/status\/\d+$/.test(u.pathname)||seen.has(t.url))continue;
       if(!Number.isFinite(date)||date>+now+300000||+now-date>72*3600000)continue;
       if(typeof t.text!=='string'||t.text.trim().length<100)continue;
+      if(!/\b(AI|LLM|GPT|model|agent|Codex|Claude|Replit|Astra|machine learning|open.weight)\b/i.test(t.text))continue;
       seen.add(t.url);items.push({name:a.name||a.handle,handle:a.handle,url:t.url,text:t.text,createdAt:t.createdAt});
     }
   }
