@@ -1,0 +1,32 @@
+name: Check draft layout
+on:
+  workflow_run:
+    workflows: ['Generate daily draft']
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  check:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download generated draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: gh run download "$RUN_ID" --repo "$GITHUB_REPOSITORY" --name daily-draft --dir draft
+      - run: node render-draft.mjs draft/draft.json docs/archive/2026-09-04.html preview.html
+      - run: npm install --no-save --ignore-scripts playwright@1.58.2
+      - run: npx playwright install --with-deps chromium
+      - run: node check-layout.cjs preview.html qa
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: draft-layout
+          path: |
+            preview.html
+            qa/*.png
+          retention-days: 3
