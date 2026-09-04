@@ -1,0 +1,73 @@
+name: Daily AI publication
+on:
+  schedule:
+    - cron: '17 0 * * *'
+    - cron: '7 1 * * *'
+  workflow_dispatch:
+    inputs:
+      deployment_test:
+        description: 'Rebuild existing site only; no new edition'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: daily-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.event.repository.private == false && (vars.DAILY_ENABLED == 'true' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check whether today's archive already exists
+        id: edition
+        env:
+          DEPLOYMENT_TEST: ${{ inputs.deployment_test }}
+        run: |
+          node --input-type=module -e 'import{existsSync,appendFileSync}from"node:fs";const day=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());appendFileSync(process.env.GITHUB_OUTPUT,"generate="+(!existsSync("docs/archive/"+day+".html")&&process.env.DEPLOYMENT_TEST!=="true")+"\n");'
+      - name: Fetch sources and verified CPU model
+        if: steps.edition.outputs.generate == 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p runtime
+          node scripts/prepare-digest.mjs > runtime/feed.json
+          curl -fL --retry 2 --max-time 300 -o runtime/llama.tar.gz https://github.com/ggml-org/llama.cpp/releases/download/b10621/llama-b10621-bin-ubuntu-x64.tar.gz
+          echo '91d7b03ddae498a39f28fdb85d84d2b4a0fd3838d10b4f897e0ef8975bb9b583  runtime/llama.tar.gz' | sha256sum -c -
+          tar -xzf runtime/llama.tar.gz -C runtime
+          curl -fL --retry 2 --max-time 1200 -o runtime/model.gguf https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf
+          echo 'd98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785  runtime/model.gguf' | sha256sum -c -
+      - name: Generate and render
+        if: steps.edition.outputs.generate == 'true'
+        env:
+          PUBLICATION: 'true'
+        run: |
+          node draft.mjs runtime/feed.json runtime/llama-b10621/llama-completion runtime/model.gguf draft-output
+          node render-draft.mjs draft-output/draft.json docs/archive/2026-09-04.html edition.html
+      - name: Check layout before publication
+        if: steps.edition.outputs.generate == 'true'
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.58.2
+          npx playwright install --with-deps chromium
+          node check-layout.cjs edition.html qa
+          node publish-bundle.mjs draft-output/draft.json edition.html docs build-site
+      - name: Save new archive
+        if: steps.edition.outputs.generate == 'true'
+        run: |
+          set -euo pipefail
+          test -f build-site/published.json
+          cp -R build-site/. docs/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs
+          git diff --cached --quiet || git commit -m 'Publish daily AI edition'
+          git push
+      - name: Build website and verify public release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" >/dev/null
+          node verify-live.mjs
