@@ -25,6 +25,6 @@ const slides=draft.items.map((item,i)=>{
 }).join('\n');
 if(!slides||!sections.length)throw Error('Missing content/template');
 const start=template.indexOf(sections[0]),end=template.indexOf(sections.at(-1))+sections.at(-1).length;
-let html=template.slice(0,start)+slides+template.slice(end);
+let html=template.slice(0,start).replaceAll('2026-09-04',day)+slides+template.slice(end).replaceAll('2026-09-04',day);
 html=html.replace(/<title>.*?<\/title>/,'<title>AI 日报 · '+day+' · 自动生成草稿</title>');
 await writeFile(output,html);
