@@ -1,8 +1,8 @@
 // Deterministic selection; source text is untrusted data, never executable code.
-export function selectItems(feed, now=new Date()) {
+export function selectItems(feed, now=new Date(),previousUrls=[]) {
   const updated=Date.parse(feed.stats?.feedGeneratedAt);
   if(!Number.isFinite(updated)||updated>+now+300000||+now-updated>72*3600000) throw Error('数据源过期或缺少更新时间，不发布');
-  const seen=new Set(),items=[];
+  const seen=new Set(previousUrls),items=[];
   for(const a of [...(feed.x||[])].sort((a,b)=>Number(b.handle==='petergyang')-Number(a.handle==='petergyang'))) {
     for(const t of a.tweets||[]) {
       let u;try{u=new URL(t.url);}catch{continue;}
