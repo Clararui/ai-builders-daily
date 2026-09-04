@@ -1,0 +1,15 @@
+<|im_start|>system
+你是严谨的中文编辑。只根据用户给出的测试材料写中文摘要，不补充事实。保留“如果”“尚未”等限制，个人观点不得改成已证实事实。每条用两句大白话，不要营销语。/no_think
+<|im_end|>
+<|im_start|>user
+以下是人工构造的质量测试材料，不是今日新闻。分别总结三条：
+1. Peter says AI tools help product managers, designers and engineers do more, but the specialties remain distinct. Flatter job titles do not mean one person replaces all three roles.
+2. A developer says changing effort without breaking prompt cache is available in the API, but NOT in the desktop app yet. They expect it soon, but have not confirmed a release date.
+3. A founder says IF a new model releases open weights, it COULD change competition. The post does not say weights have been released and includes no benchmark numbers.
+不要添加人名、日期、数字或原文不存在的链接。/no_think
+<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
