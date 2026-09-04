@@ -22,7 +22,7 @@ const slides=draft.items.map((item,i)=>{
   let figure=scenes[scene].replace(/<figcaption[\s\S]*?<\/figcaption>/,'<figcaption>场景示意 · 请以右侧本条摘要为准</figcaption>');
   if(scene===0){
     let labels=['作者有什么新观察？','阅读动态','原帖出处','观点与事实分开看'];
-    if(/influencer/i.test(item.text))labels=['宣传很热闹，能用吗？','实际体验','访问权限','宣传与可用性是两回事'];
+    if(/influencer/i.test(item.text))labels=['大家都能用了吗？','实际体验','访问权限','宣传与可用性是两回事'];
     else if(/banked reset|usage allocation|Fable limits/i.test(item.text))labels=['额度具体怎么用？','使用额度','适用规则','注意适用范围与时间'];
     else if(/extensible/i.test(item.text))labels=['还能接入什么能力？','Claude Code','扩展能力','这是早期探索'];
     else if(/community/i.test(item.text))labels=['用工具服务社区','Replit','社区应用','作者分享的使用案例'];
