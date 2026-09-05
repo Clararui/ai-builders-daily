@@ -2,7 +2,10 @@ name: Daily AI publication
 on:
   schedule:
     - cron: '17 0 * * *'
+    - cron: '37 0 * * *'
+    - cron: '57 0 * * *'
     - cron: '7 1 * * *'
+    - cron: '17 1 * * *'
   workflow_dispatch:
     inputs:
       deployment_test:
