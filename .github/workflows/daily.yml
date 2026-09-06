@@ -1,11 +1,10 @@
 name: Daily AI publication
 on:
   schedule:
-    - cron: '17 0 * * *'
-    - cron: '37 0 * * *'
-    - cron: '57 0 * * *'
-    - cron: '7 1 * * *'
-    - cron: '17 1 * * *'
+    # GitHub's free scheduler can delay or drop isolated runs. Retry every
+    # 15 minutes through the Beijing morning; the date archive is idempotent.
+    - cron: '30,45 23 * * *'
+    - cron: '*/15 0-2 * * *'
   workflow_dispatch:
     inputs:
       deployment_test:
