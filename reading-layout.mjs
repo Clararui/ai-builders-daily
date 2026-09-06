@@ -25,6 +25,13 @@ export function readingLayout(html){
  .explainer svg,.comic svg{display:block;width:100%;height:auto;max-height:none}
  .explainer figcaption,.comic figcaption{font:500 15px/1.65 system-ui;margin:8px 0 0}
  .scene-note{font:400 12px/1.6 system-ui;margin:8px 0 0;color:#777}
+ .meaning-map{margin:0;padding:20px;background:#eef0e7;border:1px solid #ccd2c5;border-radius:14px}
+ .meaning-question{font-size:17px;font-weight:750;margin-bottom:18px;color:#28352d}
+ .meaning-flow{display:flex;align-items:stretch;gap:10px}.meaning-flow>i{align-self:center;font-style:normal;font-size:22px;color:#789080}
+ .meaning-card{flex:1;min-width:0;padding:14px;background:#fffdf7;border-top:4px solid #94ad9b;border-radius:8px;overflow-wrap:anywhere}
+ .meaning-card.event{border-color:#e1a45f}.meaning-card.impact{border-color:#87a7cf}
+ .meaning-card small{display:block;font-size:12px;color:#72786f;margin-bottom:7px}.meaning-card b{font-size:15px;line-height:1.55}
+ .meaning-map figcaption{font-size:13px;line-height:1.65;color:#687168;margin-top:14px}
  .analysis{font:400 18px/1.9 system-ui;color:#333a33;overflow-wrap:anywhere}
  .analysis p{font-size:inherit;line-height:inherit;margin:0 0 18px}.analysis p+p{margin-top:0}
  .reading-note{padding:18px;margin:24px 0 0;border:0;border-left:3px solid #8aa990;background:#edeedf;font-size:16px;line-height:1.8}
@@ -32,7 +39,7 @@ export function readingLayout(html){
  .links{gap:12px;margin-top:22px}.source{font:600 15px/1.6 system-ui;padding:10px 14px;border:1px solid #ccd4c9;border-radius:8px;color:#315c49;background:#f7faf3;max-width:100%;overflow-wrap:anywhere}
  .page-tag{position:static;font:400 12px/1.7 system-ui;margin-top:24px;color:#777;overflow-wrap:anywhere}
  .reading-footer{max-width:1100px;margin:auto;padding:32px 28px 56px;font-size:14px}.reading-footer a{color:#315c49}
- @media(max-width:700px){.reading-header{padding:16px 20px}main{padding:0 20px}.slide{padding:30px 0 36px}.story{display:flex;flex-direction:column;gap:24px}h2{font-size:29px;margin:14px 0 22px}.quote{font-size:18px}.analysis{font-size:18px;line-height:1.9}.explainer{padding:10px}.page-tag{margin-top:22px}}
+ @media(max-width:700px){.reading-header{padding:16px 20px}main{padding:0 20px}.slide{padding:30px 0 36px}.story{display:flex;flex-direction:column;gap:24px}h2{font-size:29px;margin:14px 0 22px}.quote{font-size:18px}.analysis{font-size:18px;line-height:1.9}.explainer{padding:10px}.page-tag{margin-top:22px}.meaning-flow{display:grid;grid-template-columns:1fr}.meaning-flow>i{transform:rotate(90deg);justify-self:center;height:20px}.meaning-card b{font-size:16px}}
  @media print{html,body{width:auto;height:auto}.slide{width:auto;height:auto;break-after:auto}.reading-header,.reading-footer{display:none}}
  </style></head><body><header class="reading-header"><strong>AI Builders 日报</strong><a href="../index.html">往期归档 ↗</a></header><main>${sections.join('\n')}</main><footer class="reading-footer"><a href="../index.html">浏览全部往期 →</a></footer></body></html>`;
 }
