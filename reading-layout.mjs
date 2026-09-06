@@ -18,8 +18,9 @@ export function readingLayout(html){
  .mast{font:500 14px/1.5 system-ui;letter-spacing:0;border:0;padding:0;color:#637267;gap:16px}
  .mast span{white-space:nowrap}
  h2{font:750 clamp(28px,4vw,42px)/1.3 system-ui;letter-spacing:-.025em;margin:16px 0 24px;max-width:900px}
- .story{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;margin:0}
+ .story{display:block;margin:0}
  .story>*{min-width:0}
+ .visual-column{width:100%;margin-bottom:30px}
  .quote{font:650 20px/1.6 system-ui;border-left:3px solid #8aa990;padding-left:14px;margin:0 0 18px}
  .explainer,.comic{margin:0;padding:12px;background:#efeade;border:0;border-radius:12px;width:100%;height:auto;min-height:0}
  .explainer svg,.comic svg{display:block;width:100%;height:auto;max-height:none}
@@ -27,10 +28,10 @@ export function readingLayout(html){
  .scene-note{font:400 12px/1.6 system-ui;margin:8px 0 0;color:#777}
  .meaning-map{margin:0;padding:20px;background:#eef0e7;border:1px solid #ccd2c5;border-radius:14px}
  .meaning-question{font-size:17px;font-weight:750;margin-bottom:18px;color:#28352d}
- .meaning-flow{display:flex;align-items:stretch;gap:10px}.meaning-flow>i{align-self:center;font-style:normal;font-size:22px;color:#789080}
- .meaning-card{flex:1;min-width:0;padding:14px;background:#fffdf7;border-top:4px solid #94ad9b;border-radius:8px;overflow-wrap:anywhere}
+ .meaning-flow{display:grid;grid-template-columns:minmax(120px,.65fr) 28px minmax(260px,1.65fr) 28px minmax(260px,1.35fr);align-items:stretch;gap:10px}.meaning-flow>i{align-self:center;justify-self:center;font-style:normal;font-size:22px;color:#789080}
+ .meaning-card{min-width:0;padding:16px;background:#fffdf7;border-top:4px solid #94ad9b;border-radius:8px;overflow-wrap:break-word;word-break:normal}
  .meaning-card.event{border-color:#e1a45f}.meaning-card.impact{border-color:#87a7cf}
- .meaning-card small{display:block;font-size:12px;color:#72786f;margin-bottom:7px}.meaning-card b{font-size:15px;line-height:1.55}
+ .meaning-card small{display:block;font-size:12px;color:#72786f;margin-bottom:7px}.meaning-card b{font-size:16px;line-height:1.65}
  .meaning-map figcaption{font-size:13px;line-height:1.65;color:#687168;margin-top:14px}
  .analysis{font:400 18px/1.9 system-ui;color:#333a33;overflow-wrap:anywhere}
  .analysis p{font-size:inherit;line-height:inherit;margin:0 0 18px}.analysis p+p{margin-top:0}
