@@ -9,6 +9,24 @@ const sections=[...template.matchAll(/<section class="slide[\s\S]*?<\/section>/g
 const scenes=sections.map(s=>s.match(/<figure[\s\S]*?<\/figure>/)?.[0]);
 const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(draft.generatedAt));
 const sourceTime=new Date(draft.sourceUpdatedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false});
+const sentences=s=>s.match(/[^。！？]+[。！？]?/g)?.map(x=>x.trim()).filter(Boolean)||[s];
+const short=s=>s.replace(/[。！？]+$/,'').slice(0,46)+(s.replace(/[。！？]+$/,'').length>46?'…':'');
+function visualType(item){
+  const t=(item.text+' '+item.summary).toLowerCase();
+  if(/limit|quota|reset|allocation|额度|次数/.test(t))return ['额度与权限','🎟️','谁能用、能用多少'];
+  if(/eval|benchmark|test set|score|评测|测试集|得分/.test(t))return ['测试与比较','🧪','测试结果不等于所有场景'];
+  if(/extens|plugin|skill|扩展|插件/.test(t))return ['能力扩展','🧩','从功能变化看实际用途'];
+  if(/launch|release|roll.?out|available|上线|发布|开放/.test(t))return ['发布与可用性','🚦','发布不等于所有人立即可用'];
+  if(/community|council|社区/.test(t))return ['真实使用场景','🏘️','工具怎样进入现实工作'];
+  if(/open.?weight|开放权重/.test(t))return ['开放权重','🔓','观点、条件与事实要分开'];
+  if(/codex|agent|workflow|自动|工作流/.test(t))return ['AI 工作方式','🤖','AI 在哪一步提供帮助'];
+  return ['人物观点','💬','这是谁的判断，不是统一结论'];
+}
+function semanticFigure(item){
+  const ss=sentences(item.summary),[category,icon,note]=visualType(item);
+  const event=short(ss[0]||item.summary),impact=short(ss[1]||'这条动态主要体现作者的实际观察');
+  return {category,html:`<figure class="meaning-map"><div class="meaning-question">${icon} 一眼看懂：这条动态在说什么？</div><div class="meaning-flow"><div class="meaning-card who"><small>谁</small><b>${esc(item.name)}</b></div><i aria-hidden="true">→</i><div class="meaning-card event"><small>发生了什么</small><b>${esc(event)}</b></div><i aria-hidden="true">→</i><div class="meaning-card impact"><small>带来的信息</small><b>${esc(impact)}</b></div></div><figcaption>${esc(note)}。点击右侧原帖可核对完整语境。</figcaption></figure>`};
+}
 function layout(item){
   const t=item.text.toLowerCase();
   if(/product manager/.test(t)&&/designer/.test(t))return [1,'分工与协作'];
@@ -18,19 +36,7 @@ function layout(item){
   return [0,'AI 工作观察'];
 }
 const slides=draft.items.map((item,i)=>{
-  const [scene,category]=layout(item);
-  // Illustrations are explicitly explanatory, not evidence of product behavior.
-  let figure=scenes[scene].replace(/<figcaption[\s\S]*?<\/figcaption>/,'<figcaption>场景示意 · 请以右侧本条摘要为准</figcaption>');
-  if(scene===0){
-    let labels=['作者有什么新观察？','阅读动态','原帖出处','观点与事实分开看'];
-    if(/influencer/i.test(item.text))labels=['大家都能用了吗？','实际体验','访问权限','宣传与可用性是两回事'];
-    else if(/banked reset|usage allocation|Fable limits/i.test(item.text))labels=['额度具体怎么用？','使用额度','适用规则','注意适用范围与时间'];
-    else if(/extensible/i.test(item.text))labels=['还能接入什么能力？','Claude Code','扩展能力','这是早期探索'];
-    else if(/community/i.test(item.text))labels=['用工具服务社区','Replit','社区应用','作者分享的使用案例'];
-    else if(/eval|test set/i.test(item.text))labels=['复杂任务做得怎样？','任务测试','作者评测','留意测试范围'];
-    else if(/launch|roll.out/i.test(item.text))labels=['新能力何时能用？','新模型','平台接入','关注上线进展'];
-    ['今天 AI 又能帮什么？','开始工作','资料核对','做事，也检查'].forEach((old,n)=>figure=figure.replaceAll(old,labels[n]));
-  }
+  const {category,html:figure}=semanticFigure(item);
   const parts=item.summary.match(/[^。！？]+[。！？]?/g)||[item.summary];
   return `<section class="slide${i===0?' active':''}"><div class="paper"><div class="holes">${'<i></i>'.repeat(7)}</div><div class="mast reveal"><strong>${esc(category)} · 自动生成草稿</strong><span>${i+1} / ${draft.items.length}</span></div><h2 class="reveal" data-editable>${esc(item.name)} 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>${esc(category)}</div>${figure}</div><div class="analysis">${parts.map(p=>'<p data-editable>'+esc(p)+'</p>').join('')}<aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：${esc(item.createdAt)}。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">查看 ${esc(item.name)} 原帖 ↗</a></div></div></div><div class="page-tag">整理 ${day} · 中央源 ${esc(sourceTime)} 北京时间</div></div></section>`;
 }).join('\n');
