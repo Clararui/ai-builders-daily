@@ -30,16 +30,28 @@ jobs:
           DEPLOYMENT_TEST: ${{ inputs.deployment_test }}
         run: |
           node --input-type=module -e 'import{existsSync,appendFileSync}from"node:fs";const day=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());appendFileSync(process.env.GITHUB_OUTPUT,"generate="+(!existsSync("docs/archive/"+day+".html")&&process.env.DEPLOYMENT_TEST!=="true")+"\n");'
+      - name: Restore verified generation model
+        if: steps.edition.outputs.generate == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            runtime/llama-b10621
+            runtime/model.gguf
+          key: daily-model-linux-qwen3-8b-q4km-llama-b10621-v1
       - name: Fetch sources and verified CPU model
         if: steps.edition.outputs.generate == 'true'
         run: |
           set -euo pipefail
           mkdir -p runtime
           node scripts/prepare-digest.mjs > runtime/feed.json
-          curl -fL --retry 2 --max-time 300 -o runtime/llama.tar.gz https://github.com/ggml-org/llama.cpp/releases/download/b10621/llama-b10621-bin-ubuntu-x64.tar.gz
-          echo '91d7b03ddae498a39f28fdb85d84d2b4a0fd3838d10b4f897e0ef8975bb9b583  runtime/llama.tar.gz' | sha256sum -c -
-          tar -xzf runtime/llama.tar.gz -C runtime
-          curl -fL --retry 2 --max-time 1200 -o runtime/model.gguf https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf
+          if [ ! -x runtime/llama-b10621/llama-completion ]; then
+            curl -fL --retry 2 --max-time 300 -o runtime/llama.tar.gz https://github.com/ggml-org/llama.cpp/releases/download/b10621/llama-b10621-bin-ubuntu-x64.tar.gz
+            echo '91d7b03ddae498a39f28fdb85d84d2b4a0fd3838d10b4f897e0ef8975bb9b583  runtime/llama.tar.gz' | sha256sum -c -
+            tar -xzf runtime/llama.tar.gz -C runtime
+          fi
+          if [ ! -f runtime/model.gguf ]; then
+            curl -fL --retry 2 --max-time 1200 -o runtime/model.gguf https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf
+          fi
           echo 'd98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785  runtime/model.gguf' | sha256sum -c -
       - name: Generate and render
         if: steps.edition.outputs.generate == 'true'
