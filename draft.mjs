@@ -36,4 +36,6 @@ for(const [index,item] of selection.items.entries()) {
   console.log('Draft item '+(index+1)+'/'+selection.items.length+' complete');
 }
 await writeFile(resolve(output,'draft.json'),JSON.stringify({generatedAt:new Date().toISOString(),sourceUpdatedAt:selection.sourceUpdatedAt,status:'draft',reviewRecommended:true,items:results,rejected},null,2));
-if(results.length<(testOnly.length?1:4))throw Error('Too few valid summaries; do not publish');
+// A quiet news day is still a valid edition.  Require one verified summary,
+// rather than failing merely because the upstream feed contains fewer than four.
+if(results.length<1)throw Error('No valid summaries; do not publish');
