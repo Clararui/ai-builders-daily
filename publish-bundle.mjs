@@ -7,7 +7,7 @@ export async function buildPublication({draft,html,existing,staging,now=new Date
   const day=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
   const editionDate=day(new Date(draft.generatedAt));
   if(editionDate!==day(now))throw Error('Draft is not from today');
-  if(!Array.isArray(draft.items)||draft.items.length<1)throw Error('No valid items');
+  if(!Array.isArray(draft.items)||(!draft.items.length&&draft.status!=='no-updates'))throw Error('No valid items');
   selectItems({stats:{feedGeneratedAt:draft.sourceUpdatedAt},x:[]},now);
   for(const item of draft.items)cleanSummary(item.summary,item.text);
   try {await access(join(existing,'archive',editionDate+'.html'));return {skipped:true,reason:'Edition already exists'};}catch(e){if(e.code!=='ENOENT')throw e;}
