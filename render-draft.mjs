@@ -35,11 +35,12 @@ function layout(item){
   if(/verify|verification|fact.check/.test(t))return [3,'核对与执行'];
   return [0,'AI 工作观察'];
 }
-const slides=draft.items.map((item,i)=>{
+let slides=draft.items.map((item,i)=>{
   const {category,html:figure}=semanticFigure(item);
   const parts=item.summary.match(/[^。！？]+[。！？]?/g)||[item.summary];
   return `<section class="slide${i===0?' active':''}"><div class="paper"><div class="holes">${'<i></i>'.repeat(7)}</div><div class="mast reveal"><strong>${esc(category)} · 自动生成草稿</strong><span>${i+1} / ${draft.items.length}</span></div><h2 class="reveal" data-editable>${esc(item.name)} 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>${esc(category)}</div>${figure}</div><div class="analysis">${parts.map(p=>'<p data-editable>'+esc(p)+'</p>').join('')}<aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：${esc(item.createdAt)}。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">查看 ${esc(item.name)} 原帖 ↗</a></div></div></div><div class="page-tag">整理 ${day} · 中央源 ${esc(sourceTime)} 北京时间</div></div></section>`;
 }).join('\n');
+if(!slides&&draft.status==='no-updates')slides=`<section class="slide active"><div class="paper"><div class="holes">${'<i></i>'.repeat(7)}</div><div class="mast reveal"><strong>AI 工作观察 · 自动整理</strong><span>今日</span></div><h2 class="reveal">今日暂无新增动态</h2><div class="story reveal"><div class="analysis"><p>中央信息源本次更新后，没有发现尚未收录且符合筛选条件的新内容。</p><aside class="reading-note"><b>这不是生成失败</b><p>系统已经完成取数、去重和检查；有新动态时会在下一期自动收录。</p></aside><div class="links"><a class="source" href="../index.html">查看往期归档 ↗</a></div></div></div><div class="page-tag">整理 ${day} · 中央源 ${esc(sourceTime)} 北京时间</div></div></section>`;
 if(!slides||!sections.length)throw Error('Missing content/template');
 const start=template.indexOf(sections[0]),end=template.indexOf(sections.at(-1))+sections.at(-1).length;
 let html=template.slice(0,start).replaceAll('2026-09-04',day)+slides+template.slice(end).replaceAll('2026-09-04',day);
