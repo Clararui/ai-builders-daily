@@ -11,8 +11,12 @@ try{previousUrls=JSON.parse(await readFile('docs/source-urls.json','utf8'));}cat
 const selection=selectItems(feed,new Date(),previousUrls);
 const testOnly=(process.env.TEST_ONLY_URLS||'').split(',').map(s=>s.trim()).filter(Boolean);
 if(testOnly.length)selection.items=selection.items.filter(i=>testOnly.includes(i.url));
-if(!selection.items.length)throw Error('No qualifying source items; do not publish');
 await mkdir(output,{recursive:true});
+if(!selection.items.length){
+  await writeFile(resolve(output,'draft.json'),JSON.stringify({generatedAt:new Date().toISOString(),sourceUpdatedAt:selection.sourceUpdatedAt,status:'no-updates',reviewRecommended:false,items:[],rejected:[]},null,2));
+  console.log('No new qualifying source items; publishing a no-updates edition');
+  process.exit(0);
+}
 const results=[], rejected=[];
 for(const [index,item] of selection.items.entries()) {
   const hints=[];
