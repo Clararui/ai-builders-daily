@@ -1,6 +1,8 @@
 // Keep source content and existing illustrations; replace the presentation shell.
 export function readingLayout(html){
- if(html.includes('id="reading-layout"'))return html;
+ // Templates may already contain an older reading-layout block. Replace it so
+ // newly introduced visual components always receive their current styles.
+ html=html.replace(/<style id="reading-layout">[\s\S]*?<\/style>/,'');
  const sections=[...html.matchAll(/<section class="slide[\s\S]*?<\/section>/g)].map((m,i)=>m[0].replace(/<section class="[^"]*"[^>]*>/,`<section class="slide" id="slide-${i+1}">`).replaceAll('右侧本条摘要','本条摘要'));
  if(!sections.length)throw Error('No readable sections');
  const head=html.slice(0,html.indexOf('</head>'));
