@@ -26,6 +26,20 @@ export function readingLayout(html){
  .explainer svg,.comic svg{display:block;width:100%;height:auto;max-height:none}
  .explainer figcaption,.comic figcaption{font:500 15px/1.65 system-ui;margin:8px 0 0}
  .scene-note{font:400 12px/1.6 system-ui;margin:8px 0 0;color:#777}
+ .visual-story{margin:0;padding:14px;background:#f2eee5;border:1px solid #d3ccbd;border-radius:18px;overflow:hidden}
+ .story-svg{display:block;width:100%;height:auto;max-height:470px}
+ .story-svg .paper-bg{fill:#f5f0e8;stroke:#1f211d;stroke-width:2}
+ .story-svg .ground,.story-svg .flow,.story-svg .shrink{fill:none;stroke:#718878;stroke-width:6;stroke-linecap:round;stroke-dasharray:12 12}
+ .story-svg .flow{animation:dash 2.4s linear infinite}
+ .story-svg .person circle,.story-svg .person path,.story-svg .bot rect,.story-svg .bot path,.story-svg .bot circle,.story-svg .laptop path,.story-svg .laptop rect,.story-svg .web circle,.story-svg .web path,.story-svg .phone rect,.story-svg .phone circle,.story-svg .arm path,.story-svg .watch rect,.story-svg .watch circle,.story-svg .watch path,.story-svg .threads rect,.story-svg .threads path,.story-svg .product rect,.story-svg .product path,.story-svg .gate path,.story-svg .gate circle,.story-svg .crowd circle,.story-svg .crowd path,.story-svg .before circle,.story-svg .before path,.story-svg .before rect,.story-svg .after path,.story-svg .report rect,.story-svg .report path,.story-svg .report circle,.story-svg .bubble path,.story-svg .lens circle,.story-svg .lens path{fill:#fff;stroke:#242620;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+ .story-svg .bot{animation:float 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.story-svg .bot:nth-of-type(2){animation-delay:.35s}.story-svg .bot:nth-of-type(3){animation-delay:.7s}
+ .story-svg .warning path{fill:#ef6a5b;stroke:#242620;stroke-width:5}.story-svg .warning text,.story-svg .pings text{font:800 32px system-ui;text-anchor:middle;fill:#242620}
+ .story-svg .focus{fill:#ffe29a;stroke:#242620;stroke-width:4;opacity:.8}.story-svg .pings circle{fill:#ef6a5b;stroke:#242620;stroke-width:4}.story-svg .pings{animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+ .story-svg .crossed path{fill:none;stroke:#ef6a5b;stroke-width:9}.story-svg .spark{fill:#f7c95c!important;animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.story-svg .bug circle{fill:#ef6a5b;stroke:#242620;stroke-width:4}.story-svg .bug path{stroke:#fff;stroke-width:6}
+ .story-svg .label{font:650 19px system-ui;fill:#343831}.story-svg .label.accent{fill:#315c49}
+ .visual-story figcaption{font:650 17px/1.7 system-ui;color:#28352d;padding:10px 8px 4px}
+ @keyframes dash{to{stroke-dashoffset:-48}}@keyframes float{50%{translate:0 -8px}}@keyframes pulse{50%{scale:1.08}}
+ @media(prefers-reduced-motion:reduce){.story-svg *{animation:none!important}}
  .meaning-map{margin:0;padding:20px;background:#eef0e7;border:1px solid #ccd2c5;border-radius:14px}
  .meaning-question{font-size:17px;font-weight:750;margin-bottom:18px;color:#28352d}
  .meaning-flow{display:grid;grid-template-columns:minmax(120px,.65fr) 28px minmax(260px,1.65fr) 28px minmax(260px,1.35fr);align-items:stretch;gap:10px}.meaning-flow>i{align-self:center;justify-self:center;font-style:normal;font-size:22px;color:#789080}
