@@ -7,10 +7,12 @@ const {mkdirSync}=require('node:fs');
  await page.goto('file://'+resolve(process.argv[2]));await page.waitForTimeout(1000);
  const count=await page.locator('.slide').count();
  if(await page.locator('#reading-layout').count()){
+  const out=resolve(process.argv[3]||'work/cloud-daily');mkdirSync(out,{recursive:true});
   for(const width of [390,1280]){
    await page.setViewportSize({width,height:844});
    const ok=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1&&[...document.querySelectorAll('.slide')].every(s=>s.getBoundingClientRect().height>0)&&parseFloat(getComputedStyle(document.querySelector('.analysis')).fontSize)>=16);
    if(!ok)throw Error('Reading layout failed at '+width);
+   await page.screenshot({path:resolve(out,width===390?'layout-phone.png':'layout-desktop.png'),fullPage:false});
   }
   console.log('Verified responsive reading layout: '+count+' articles');await browser.close();return;
  }
