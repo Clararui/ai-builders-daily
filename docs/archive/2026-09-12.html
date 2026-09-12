@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Builders 每日动态，2026-09-12">
+  <title>AI 日报 · 2026-09-12 · 自动整理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,600;6..96,800&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+    /* === THEME TOKENS === */
+    :root {
+      --stage-bg:#242421; --slide-bg:#f8f4eb; --paper:#f8f4eb; --ink:#171714;
+      --muted:#65615a; --line:#cbc4b7; --mint:#9bcbb4; --blue:#9ebee8;
+      --pink:#e6a9b8; --gold:#e7c971; --orange:#ed7b4f; --ease:cubic-bezier(.16,1,.3,1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg,#000)}
+    .deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg,#000)}
+    .deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:var(--slide-bg,#fff)}
+    .slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--slide-bg,#fff)}
+    .slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1}
+    img,video,canvas,svg{max-width:100%;max-height:100%}
+    .deck-controls{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:1000}
+    @media print{html,body{width:1920px;height:auto;overflow:visible;background:#fff}.deck-viewport{position:static;overflow:visible;background:#fff}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}.slide:last-child{break-after:auto;page-break-after:auto}.deck-controls{display:none!important}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+
+    /* === TYPOGRAPHY & SHARED PAPER FRAME === */
+    body{font-family:"Noto Sans SC",sans-serif;color:var(--ink)}
+    .paper{position:absolute;inset:64px 88px;background:var(--paper);box-shadow:0 28px 90px #0008;padding:74px 108px 70px;overflow:hidden}
+    .paper::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E")}
+    .holes{position:absolute;left:27px;top:112px;display:grid;gap:104px}.holes i{width:17px;height:17px;background:#2b2b28;border-radius:50%;box-shadow:inset 0 2px 4px #0008}
+    .tabs{position:absolute;right:-22px;top:90px;display:grid;gap:15px;z-index:4}.tabs span{width:82px;height:112px;border-radius:0 10px 10px 0;display:grid;place-items:center;font-size:18px;font-weight:800;writing-mode:vertical-rl}.tabs span:nth-child(1){background:var(--mint)}.tabs span:nth-child(2){background:var(--blue)}.tabs span:nth-child(3){background:var(--pink)}.tabs span:nth-child(4){background:var(--gold)}
+    .mast{position:relative;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--ink);padding-bottom:18px;font:500 20px/1 "DM Mono",monospace;letter-spacing:.08em;z-index:2}
+    .mast strong{font-family:"Noto Sans SC",sans-serif;font-weight:900;letter-spacing:0}.section-no{color:var(--muted)}
+    h1,h2,.serif{font-family:"Bodoni Moda","Noto Sans SC",serif}
+    h2{position:relative;font-size:76px;line-height:1.08;letter-spacing:-.045em;margin-top:45px;max-width:1460px;z-index:2}
+    .dek{position:relative;font-size:27px;color:var(--muted);margin-top:18px;z-index:2}
+    .source{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--ink);font:700 18px/1.4 "Noto Sans SC",sans-serif;padding-bottom:2px}.source::after{content:"↗"}.source:hover{color:#8e4c36;border-color:#8e4c36}
+    .page-tag{position:absolute;left:108px;bottom:34px;font:500 17px/1 "DM Mono",monospace;color:#77736c;z-index:3}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}.visible .reveal{opacity:1;transform:none}.visible .reveal:nth-child(2){transition-delay:.08s}.visible .reveal:nth-child(3){transition-delay:.16s}.visible .reveal:nth-child(4){transition-delay:.24s}.visible .reveal:nth-child(5){transition-delay:.32s}
+
+    /* === TITLE SLIDE === */
+    .title .paper{padding-top:76px}.title h1{font-size:136px;line-height:1;letter-spacing:-.06em;margin-top:105px}.title h1 span{font-family:"Noto Sans SC",sans-serif;font-weight:900}.title .subtitle{font-size:34px;color:#4f4b45;margin-top:30px}.title .date{position:absolute;left:108px;bottom:82px;font-size:23px;font-weight:700}.stamp{position:absolute;right:142px;bottom:70px;border:2px solid var(--ink);padding:14px 20px;font:500 18px/1 "DM Mono",monospace;transform:rotate(-2deg)}
+
+    /* === OVERVIEW INDEX === */
+    .index-grid{position:relative;display:grid;grid-template-columns:1.3fr 1fr;gap:70px;margin-top:48px;z-index:2}.lead{border-top:12px solid var(--orange);padding-top:24px}.lead .big{font:800 60px/1.12 "Bodoni Moda","Noto Sans SC",serif}.lead p{font-size:25px;line-height:1.55;margin-top:20px;color:#4d4943}.signals{display:grid;gap:0;border-top:2px solid var(--ink)}.signal-row{display:grid;grid-template-columns:70px 1fr;gap:22px;padding:20px 0;border-bottom:1px solid var(--line)}.signal-row b{font:500 24px/1 "DM Mono",monospace;color:#8b857c}.signal-row span{font-size:24px;font-weight:700;line-height:1.3}
+
+    /* === STORY LAYOUTS === */
+    .story{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:76px;margin-top:46px;z-index:2}.quote{font:600 45px/1.28 "Bodoni Moda","Noto Sans SC",serif;border-left:10px solid var(--blue);padding-left:34px}.quote.orange{border-color:var(--orange)}.quote.mint{border-color:var(--mint)}.quote.pink{border-color:var(--pink)}.analysis{font-size:25px;line-height:1.58;color:#45413c}.analysis p+p{margin-top:20px}.takeaway{margin-top:28px;background:#ebe5d9;padding:21px 25px;font-size:22px;line-height:1.48;border-top:3px solid var(--ink)}.links{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px}
+    .metric{display:flex;align-items:end;gap:18px;margin:12px 0 28px}.metric strong{font:800 112px/.9 "Bodoni Moda",serif;letter-spacing:-.06em}.metric span{font-size:23px;font-weight:800;padding-bottom:12px}.formula{font:500 34px/1.35 "DM Mono",monospace;background:#171714;color:#f8f4eb;padding:28px 32px;margin-bottom:26px}.formula em{color:#e7c971;font-style:normal}
+    .duo{display:grid;grid-template-columns:1fr 1fr;gap:34px}.voice{padding:30px 32px;border:1px solid var(--line);background:#f2ede3}.voice h3{font-size:25px;margin-bottom:18px}.voice p{font-size:22px;line-height:1.5;color:#4e4943}.voice .source{margin-top:22px}
+
+    /* === PODCAST FEATURE === */
+    .podcast-band{position:relative;margin-top:42px;background:#171714;color:#f7f1e7;padding:38px 44px;display:grid;grid-template-columns:.75fr 1.25fr;gap:54px;z-index:2}.podcast-band .number{font:800 128px/.9 "Bodoni Moda",serif;color:var(--gold)}.podcast-band .number small{display:block;font:500 17px/1.4 "DM Mono",monospace;color:#aaa;margin-top:18px}.podcast-band h3{font-size:34px;line-height:1.25}.podcast-band p{font-size:22px;line-height:1.55;color:#d6d1c8;margin-top:15px}.podcast-band .source{color:#fff;border-color:#fff;margin-top:20px}
+
+    /* === ACTION & SOURCES === */
+    .action-list{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px;z-index:2}.action{min-height:430px;padding:32px;border-top:10px solid var(--mint);background:#eee8dc}.action:nth-child(2){border-color:var(--blue)}.action:nth-child(3){border-color:var(--orange)}.action b{font:500 20px/1 "DM Mono",monospace;color:#7b756c}.action h3{font-size:32px;line-height:1.2;margin:22px 0}.action p{font-size:22px;line-height:1.5;color:#514d47}
+    .source-list{position:relative;display:grid;grid-template-columns:1fr 1fr;column-gap:56px;margin-top:40px;z-index:2}.source-item{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:18px;border-top:1px solid var(--line);padding:17px 0}.source-item b{font:500 17px/1 "DM Mono",monospace;color:#8a847b}.source-item span{font-size:20px;font-weight:700}.source-item a{color:var(--ink);font-size:22px;text-decoration:none}.source-item a:hover{color:#8e4c36}
+
+    /* === CONTROLS & EDITING === */
+    .deck-controls{display:flex;align-items:center;gap:12px;background:#151513e8;color:#fff;border:1px solid #555;padding:8px 14px;border-radius:999px;font:500 13px/1 "DM Mono",monospace;opacity:.15;transition:opacity .2s}.deck-controls:hover{opacity:1}.deck-controls button{border:0;background:transparent;color:#fff;font-size:18px;cursor:pointer;padding:2px 8px}.progress{width:92px;height:3px;background:#555}.progress i{display:block;height:100%;background:var(--gold);width:10%}.edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer}.edit-toggle{position:fixed;top:18px;left:18px;z-index:10001;border:0;border-radius:50%;width:44px;height:44px;background:#171714;color:#fff;opacity:0;pointer-events:none;transition:opacity .3s}.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto}.editing [data-editable]{outline:2px dashed #ed7b4f;outline-offset:4px;cursor:text}
+  
+/* === V2 READING-FIRST EDITORIAL DIAGRAMS === */
+.paper{padding:56px 94px 66px}
+.mast{font-size:19px}
+h2{font-size:62px;line-height:1.16;margin-top:28px;letter-spacing:-.035em}
+.story{grid-template-columns: .97fr 1.03fr;gap:52px;margin-top:30px}
+.quote{font-size:31px;line-height:1.4;border-left:6px solid var(--orange);padding-left:20px;font-weight:700}
+.explainer{margin-top:24px;padding:26px;background:#eee8dc;border:1px solid #d6cebf;position:relative;font-family:"Noto Sans SC",sans-serif}
+.mini-label{font:500 18px/1.5 "DM Mono","Noto Sans SC",sans-serif;color:#655e53;margin-bottom:18px}
+.triple{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center}
+.tile{padding:24px 10px;border:1px solid #bdb4a4;font-size:26px;font-weight:700;background:#f8f4eb;line-height:1.5}
+small{font-size:18px;font-weight:400}
+.blue{background:#cbdbee!important}.pink{background:#edd0d5!important}.mint{background:#c7ddd0!important}
+.wide{padding:19px 14px;text-align:center;border:1px solid #bcb3a4;background:#f8f4eb;font-size:25px;font-weight:700;line-height:1.5}
+.ink{background:#272924;color:#faf5e9;border-color:#272924}
+.warning{background:#f5d3b8;border:2px solid #b76337;color:#663619}
+.arrow{text-align:center;font-size:20px;color:#776a57;padding:7px}
+.join{text-align:center;font-size:22px;padding:24px;border-left:1px solid #ac9f8e;border-right:1px solid #ac9f8e;margin:0 60px}
+.diagram-note{font-size:19px;line-height:1.65;color:#6b6254;margin-top:22px;border-top:1px solid #c9bfad;padding-top:16px}
+.map-row{display:flex;gap:24px;align-items:center;border-bottom:1px solid #c8bead;padding:22px 0}
+.map-row:first-child{padding-top:4px}
+.map-row b{font:600 33px/1 "Bodoni Moda",serif;color:#ac5938;min-width:52px}
+.map-row strong{display:block;font-size:27px;line-height:1.5}
+.map-row span{font-size:21px;color:#6b6254;line-height:1.7}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px}
+.lane strong{display:block;font-size:25px;margin-bottom:14px}.lane span{display:block;font-size:20px;margin-top:16px;line-height:1.5}
+.lane .tile{font-size:23px;min-height:130px;display:flex;align-items:center;justify-content:center}
+.engine{border:2px dashed #a59982;padding:22px 14px}.engine .triple{font-size:23px;line-height:1.6}
+.status-row{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid #c7beac;font-size:25px}
+.status-row span{padding:7px 13px;font-size:22px}.status-row+.wide{margin-top:18px}
+.analysis{font-size:24px;line-height:1.65;color:#38362f}
+.analysis>p+p{margin-top:20px}
+.reading-note{margin-top:24px;padding:18px 22px;border-left:4px solid #a7bca9;background:#e8e9de;font-size:22px;line-height:1.6}
+.reading-note>b{font-size:16px;letter-spacing:.08em;display:block;color:#687260;margin-bottom:6px}
+.links{gap:12px 22px;margin-top:20px}.links a{font-size:18px}
+.page-tag{left:94px;font-size:16px;bottom:28px}
+.deck-controls{opacity:.85}
+.export-button{position:fixed;right:18px;top:18px;z-index:10001;background:#f8f4eb;color:#171714;border:1px solid #bbb;padding:10px 15px;border-radius:6px;cursor:pointer;display:none}
+.editing .export-button{display:block}
+/* === PLAIN-LANGUAGE SCENES: SELF-CONTAINED EDITABLE SVG === */
+.explainer.comic{padding:12px 0 0;border:0;background:transparent;margin-top:15px}
+.comic svg{display:block;width:100%;height:auto;overflow:visible;font-family:"Noto Sans SC",sans-serif}
+.comic figcaption{font-size:27px;line-height:1.6;font-weight:700;background:#eee7d9;border-radius:3px;padding:20px 23px;margin-top:14px}
+.scene-note{font-size:17px;line-height:1.5;color:#776e5e;margin-top:13px}
+.quote{font-size:30px;line-height:1.45}
+</style>
+<meta name="edition-date" content="2026-09-12">
+<style id="reading-layout">
+ html,body{width:100%;height:auto;overflow:visible;background:#f8f4eb;color:#252720;scroll-behavior:smooth}
+ body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif}
+ *,*::before,*::after{box-sizing:border-box}
+ .reading-header{max-width:1100px;margin:auto;padding:24px 28px;display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #d9d4c8;font-size:15px}
+ .reading-header a{color:#315c49;text-decoration:none;padding:6px 0}
+ main{max-width:1100px;margin:auto;padding:0 28px}
+ .slide,.slide.active,.slide.visible{position:relative;inset:auto;width:100%;height:auto;min-height:0;display:block;visibility:visible;opacity:1;pointer-events:auto;overflow:visible;background:transparent;padding:44px 0;border-bottom:1px solid #cfc8b9;scroll-margin-top:16px}
+ .paper{position:relative;inset:auto;padding:0;overflow:visible;box-shadow:none;background:transparent;width:auto;height:auto}
+ .paper::before,.holes,.tabs{display:none}
+ .reveal{opacity:1;transform:none;transition:none}
+ .mast{font:500 14px/1.5 system-ui;letter-spacing:0;border:0;padding:0;color:#637267;gap:16px}
+ .mast span{white-space:nowrap}
+ h2{font:750 clamp(28px,4vw,42px)/1.3 system-ui;letter-spacing:-.025em;margin:16px 0 24px;max-width:900px}
+ .story{display:block;margin:0}
+ .story>*{min-width:0}
+ .visual-column{width:100%;margin-bottom:30px}
+ .quote{font:650 20px/1.6 system-ui;border-left:3px solid #8aa990;padding-left:14px;margin:0 0 18px}
+ .explainer,.comic{margin:0;padding:12px;background:#efeade;border:0;border-radius:12px;width:100%;height:auto;min-height:0}
+ .explainer svg,.comic svg{display:block;width:100%;height:auto;max-height:none}
+ .explainer figcaption,.comic figcaption{font:500 15px/1.65 system-ui;margin:8px 0 0}
+ .scene-note{font:400 12px/1.6 system-ui;margin:8px 0 0;color:#777}
+ .visual-story{margin:0;padding:14px;background:#f2eee5;border:1px solid #d3ccbd;border-radius:18px;overflow:hidden}
+ .story-svg{display:block;width:100%;height:auto;max-height:470px}
+ .story-svg .paper-bg{fill:#f5f0e8;stroke:#1f211d;stroke-width:2}
+ .story-svg .ground,.story-svg .flow,.story-svg .shrink{fill:none;stroke:#718878;stroke-width:6;stroke-linecap:round;stroke-dasharray:12 12}
+ .story-svg .flow{animation:dash 2.4s linear infinite}
+ .story-svg .person circle,.story-svg .person path,.story-svg .bot rect,.story-svg .bot path,.story-svg .bot circle,.story-svg .laptop path,.story-svg .laptop rect,.story-svg .web circle,.story-svg .web path,.story-svg .phone rect,.story-svg .phone circle,.story-svg .arm path,.story-svg .watch rect,.story-svg .watch circle,.story-svg .watch path,.story-svg .threads rect,.story-svg .threads path,.story-svg .product rect,.story-svg .product path,.story-svg .gate path,.story-svg .gate circle,.story-svg .crowd circle,.story-svg .crowd path,.story-svg .before circle,.story-svg .before path,.story-svg .before rect,.story-svg .after path,.story-svg .report rect,.story-svg .report path,.story-svg .report circle,.story-svg .bubble path,.story-svg .lens circle,.story-svg .lens path{fill:#fff;stroke:#242620;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+ .story-svg .bot{animation:float 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.story-svg .bot:nth-of-type(2){animation-delay:.35s}.story-svg .bot:nth-of-type(3){animation-delay:.7s}
+ .story-svg .warning path{fill:#ef6a5b;stroke:#242620;stroke-width:5}.story-svg .warning text,.story-svg .pings text{font:800 32px system-ui;text-anchor:middle;fill:#242620}
+ .story-svg .focus{fill:#ffe29a;stroke:#242620;stroke-width:4;opacity:.8}.story-svg .pings circle{fill:#ef6a5b;stroke:#242620;stroke-width:4}.story-svg .pings{animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+ .story-svg .crossed path{fill:none;stroke:#ef6a5b;stroke-width:9}.story-svg .spark{fill:#f7c95c!important;animation:pulse 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.story-svg .bug circle{fill:#ef6a5b;stroke:#242620;stroke-width:4}.story-svg .bug path{stroke:#fff;stroke-width:6}
+ .story-svg .label{font:650 19px system-ui;fill:#343831}.story-svg .label.accent{fill:#315c49}
+ .visual-story figcaption{font:650 17px/1.7 system-ui;color:#28352d;padding:10px 8px 4px}
+ @keyframes dash{to{stroke-dashoffset:-48}}@keyframes float{50%{translate:0 -8px}}@keyframes pulse{50%{scale:1.08}}
+ @media(prefers-reduced-motion:reduce){.story-svg *{animation:none!important}}
+ .meaning-map{margin:0;padding:20px;background:#eef0e7;border:1px solid #ccd2c5;border-radius:14px}
+ .meaning-question{font-size:17px;font-weight:750;margin-bottom:18px;color:#28352d}
+ .meaning-flow{display:grid;grid-template-columns:minmax(120px,.65fr) 28px minmax(260px,1.65fr) 28px minmax(260px,1.35fr);align-items:stretch;gap:10px}.meaning-flow>i{align-self:center;justify-self:center;font-style:normal;font-size:22px;color:#789080}
+ .meaning-card{min-width:0;padding:16px;background:#fffdf7;border-top:4px solid #94ad9b;border-radius:8px;overflow-wrap:break-word;word-break:normal}
+ .meaning-card.event{border-color:#e1a45f}.meaning-card.impact{border-color:#87a7cf}
+ .meaning-card small{display:block;font-size:12px;color:#72786f;margin-bottom:7px}.meaning-card b{font-size:16px;line-height:1.65}
+ .meaning-map figcaption{font-size:13px;line-height:1.65;color:#687168;margin-top:14px}
+ .analysis{font:400 18px/1.9 system-ui;color:#333a33;overflow-wrap:anywhere}
+ .analysis p{font-size:inherit;line-height:inherit;margin:0 0 18px}.analysis p+p{margin-top:0}
+ .reading-note{padding:18px;margin:24px 0 0;border:0;border-left:3px solid #8aa990;background:#edeedf;font-size:16px;line-height:1.8}
+ .reading-note p{font-size:16px;margin:8px 0 0}
+ .links{gap:12px;margin-top:22px}.source{font:600 15px/1.6 system-ui;padding:10px 14px;border:1px solid #ccd4c9;border-radius:8px;color:#315c49;background:#f7faf3;max-width:100%;overflow-wrap:anywhere}
+ .page-tag{position:static;font:400 12px/1.7 system-ui;margin-top:24px;color:#777;overflow-wrap:anywhere}
+ .reading-footer{max-width:1100px;margin:auto;padding:32px 28px 56px;font-size:14px}.reading-footer a{color:#315c49}
+ @media(max-width:1000px){.meaning-flow{display:grid;grid-template-columns:1fr}.meaning-flow>i{transform:rotate(90deg);justify-self:center;height:20px}.meaning-card b{font-size:16px}}
+ @media(max-width:700px){.reading-header{padding:16px 20px}main{padding:0 20px}.slide{padding:30px 0 36px}.story{display:flex;flex-direction:column;gap:24px}h2{font-size:29px;margin:14px 0 22px}.quote{font-size:18px}.analysis{font-size:18px;line-height:1.9}.explainer{padding:10px}.page-tag{margin-top:22px}}
+ @media print{html,body{width:auto;height:auto}.slide{width:auto;height:auto;break-after:auto}.reading-header,.reading-footer{display:none}}
+ </style></head><body><header class="reading-header"><strong>AI Builders 日报</strong><a href="../index.html">往期归档 ↗</a></header><main><section class="slide" id="slide-1"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>人物观点 · 自动整理</strong><span>1 / 11</span></div><h2 class="reveal" data-editable>Boris Cherny 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>人物观点</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>最新威胁情报报告令人担忧且重要。</p><p data-editable>随着模型变得更智能，若缺乏适当保障和监控，其风险也会增加。</p><p data-editable>许多能力具有双重用途，例如代码能力强的模型可能被用于攻击关键基础设施，协助生物学研究的模型也可能被用于制造新疫情。</p><p data-editable>这些问题复杂且日益重要，需让更多人了解以应对快速上升的风险。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-11T05:25:41.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/bcherny/status/2098281805770309686" target="_blank" rel="noopener noreferrer">查看 Boris Cherny 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-2"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>能力扩展 · 自动整理</strong><span>2 / 11</span></div><h2 class="reveal" data-editable>Boris Cherny 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>能力扩展</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Boris Cherny认为原型代码可视为黑盒，无需完美。</p><p data-editable>生产代码则需更高标准，Anthropic有多种措施保障质量。</p><p data-editable>若Claude代码未达标，可升级模型、提高努力程度或优化指导文档。</p><p data-editable>若仍不行，可手动干预或等待新模型。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-11T01:10:27.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/bcherny/status/2098217573276131577" target="_blank" rel="noopener noreferrer">查看 Boris Cherny 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-3"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>AI 工作方式 · 自动整理</strong><span>3 / 11</span></div><h2 class="reveal" data-editable>Thibault Sottiaux 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>AI 工作方式</div><figure class="visual-story"><svg class="story-svg" data-scene="agent-web" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="laptop"><path d="M104 306h130l22 24H82z"/><rect x="111" y="245" width="116" height="65" rx="7"/></g><path class="flow" d="M260 262C355 245 410 230 492 218"/><g class="bot" transform="translate(365 236) scale(0.72)"><rect x="-34" y="-27" width="68" height="55" rx="15"/><path d="M0-27v-17m-8 0h16"/><circle cx="-13" cy="-5" r="5"/><circle cx="13" cy="-5" r="5"/><path d="M-13 13h26"/></g><g class="bot" transform="translate(455 205) scale(0.62)"><rect x="-34" y="-27" width="68" height="55" rx="15"/><path d="M0-27v-17m-8 0h16"/><circle cx="-13" cy="-5" r="5"/><circle cx="13" cy="-5" r="5"/><path d="M-13 13h26"/></g><g class="bot" transform="translate(530 185) scale(0.55)"><rect x="-34" y="-27" width="68" height="55" rx="15"/><path d="M0-27v-17m-8 0h16"/><circle cx="-13" cy="-5" r="5"/><circle cx="13" cy="-5" r="5"/><path d="M-13 13h26"/></g><g class="web"><circle cx="695" cy="205" r="103"/><path d="M592 205h206M695 103c-57 55-57 149 0 205M695 103c57 55 57 149 0 205"/></g><g class="warning"><path d="M747 86l42 73h-84z"/><text x="747" y="140">!</text></g><text class="label" x="95" y="385">每个人都派出 AI 代理</text><text class="label accent" x="625" y="385">网站基础设施承压</text></svg><figcaption>一眼看懂：大量个人 AI 代理进入互联网后，网站、产品体验和商业模式都要重新适应。</figcaption></figure></div><div class="analysis"><p data-editable>作者提到Scaled agents on demand是ChatGPT Work背后的基础设施，封装成API，可在不到1分钟内开始使用。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-11T02:32:10.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/thsottiaux/status/2098238138334548260" target="_blank" rel="noopener noreferrer">查看 Thibault Sottiaux 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-4"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>发布与可用性 · 自动整理</strong><span>4 / 11</span></div><h2 class="reveal" data-editable>Thibault Sottiaux 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>发布与可用性</div><figure class="visual-story"><svg class="story-svg" data-scene="rollout" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="product"><rect x="105" y="105" width="250" height="205" rx="22"/><path d="M145 155h170M145 205h130M145 255h155"/></g><g class="gate"><path d="M430 105v230M545 105v230M430 150h115M430 220h115"/><circle cx="487" cy="277" r="20"/></g><g class="crowd"><circle cx="665" cy="160" r="34"/><path d="M620 280q5-88 45-88t45 88"/><circle cx="775" cy="190" r="28"/><path d="M740 290q5-70 35-70t35 70"/></g><path class="flow" d="M355 210h67m132 0h70"/><text class="label" x="120" y="365">新产品</text><text class="label accent" x="420" y="385">分批开放，不是人人立刻可用</text></svg><figcaption>一眼看懂：产品已经开始发布，但用户通常需要分批通过开放入口。</figcaption></figure></div><div class="analysis"><p data-editable>作者表示将暂停$200 Pro计划的订阅，以减轻系统负担，确保现有用户继续享受Astra服务。</p><p data-editable>其他计划和API仍可用，现有账户不受影响，团队正在加快增加容量。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T18:17:14.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/thsottiaux/status/2098113585683808624" target="_blank" rel="noopener noreferrer">查看 Thibault Sottiaux 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-5"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>测试与比较 · 自动整理</strong><span>5 / 11</span></div><h2 class="reveal" data-editable>Madhu Guru 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>测试与比较</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>如何构建优秀的评估？</p><p data-editable>第10部分。</p><p data-editable>不仅要关注结果，更要衡量每一步。</p><p data-editable>两个代理可能得出相同答案，但过程不同。</p><p data-editable>一个步骤清晰，工具调用少，另一个则调用多且重复。</p><p data-editable>应明确工作流程，定义每步任务，思考如何评估每一步，并区分中等和困难任务。</p><p data-editable>查看评估结果时，先分析步骤再看结果。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T15:04:03.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/realmadhuguru/status/2098064969464217720" target="_blank" rel="noopener noreferrer">查看 Madhu Guru 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-6"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>人物观点 · 自动整理</strong><span>6 / 11</span></div><h2 class="reveal" data-editable>Thariq 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>人物观点</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>用户建议在Claude聊天中使用特定提示，以更深入了解自己的相关生活部分，并通过问答工具获取更多信息，保存至记忆中。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T21:12:08.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/trq212/status/2098157600361861579" target="_blank" rel="noopener noreferrer">查看 Thariq 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-7"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>人物观点 · 自动整理</strong><span>7 / 11</span></div><h2 class="reveal" data-editable>Amjad Masad 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>人物观点</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Amjad Masad提到AI存在很多风险，尤其担忧网络安全问题。</p><p data-editable>但他认为“灭绝风险”即人类全部死亡的情况，并不现实。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T22:06:26.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/amasad/status/2098171265924116732" target="_blank" rel="noopener noreferrer">查看 Amjad Masad 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-8"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>测试与比较 · 自动整理</strong><span>8 / 11</span></div><h2 class="reveal" data-editable>Aaron Levie 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>测试与比较</div><figure class="visual-story"><svg class="story-svg" data-scene="open-weights" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Aaron Levie分享了与多位科技领袖的交流，讨论企业中的智能代理应用。</p><p data-editable>当前趋势包括：对AI带来的网络安全风险高度关注，企业部署多种前沿模型但难以统一，代理安全与身份管理成为新挑战，流程重构带来更高回报，架构调整频繁，评估体系尚不成熟，以及遗留系统仍是AI应用的主要障碍。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-11T01:13:16.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/levie/status/2098218284139311615" target="_blank" rel="noopener noreferrer">查看 Aaron Levie 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-9"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>AI 工作方式 · 自动整理</strong><span>9 / 11</span></div><h2 class="reveal" data-editable>Aaron Levie 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>AI 工作方式</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Aaron Levie表示期待与OpenAI更深入合作，让企业用户能安全地在ChatGPT中使用Box中的内容。</p><p data-editable>他认为软件正变得无头化，未来工作将由能处理数据和执行任务的AI代理主导。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T19:44:57.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/levie/status/2098135659714085281" target="_blank" rel="noopener noreferrer">查看 Aaron Levie 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-10"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>AI 工作方式 · 自动整理</strong><span>10 / 11</span></div><h2 class="reveal" data-editable>Matt Turck 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>AI 工作方式</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Matt Turck分享了与Richard Socher的对话，讨论AI自我改进、科学进步放缓的原因、AI在科学中的作用、LLMs学习生物学的方式、AI生成原创想法的可能性、AI在药物研发和癌症治疗中的潜力，以及AI面临的挑战和未来发展方向。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T16:09:32.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/mattturck/status/2098081448330674182" target="_blank" rel="noopener noreferrer">查看 Matt Turck 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section>
+<section class="slide" id="slide-11"><div class="paper"><div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mast reveal"><strong>真实使用场景 · 自动整理</strong><span>11 / 11</span></div><h2 class="reveal" data-editable>Claude 的最新动态</h2><div class="story reveal"><div class="visual-column"><div class="quote" data-editable>真实使用场景</div><figure class="visual-story"><svg class="story-svg" data-scene="explain" viewBox="0 0 900 420" role="img" aria-label="本条动态的情境插画"><rect class="paper-bg" x="5" y="5" width="890" height="410" rx="24"/><path class="ground" d="M70 350 C260 338 620 362 830 346"/><g class="person"><circle cx="165" cy="170" r="43"/><path d="M112 300q8-88 53-88t55 88"/><path d="M143 166q22 18 44 0"/></g><g class="bubble"><path d="M285 85h430q35 0 35 35v145q0 35-35 35H470l-65 55 18-55H285q-35 0-35-35V120q0-35 35-35z"/><path d="M315 140h355M315 190h280M315 240h320"/></g><g class="lens"><circle cx="735" cy="315" r="48"/><path d="M770 350l55 45"/></g><text class="label" x="95" y="385">作者提出观点</text><text class="label accent" x="555" y="385">看原帖，分清事实与判断</text></svg><figcaption>一眼看懂：这是作者提出的观点或观察，需要结合原帖判断它是事实、预测还是个人感受。</figcaption></figure></div><div class="analysis"><p data-editable>Fable 5.1 构建日本周开始。</p><p data-editable>Claude 社区将在全球多个城市举办构建活动，时间从9月11日至25日。</p><p data-editable>参与者可带来问题、想法或直接参与体验。</p><p data-editable>活动报名链接已提供。</p><aside class="reading-note"><b>来源与阅读提示</b><p>原帖时间：2026-09-10T19:57:11.000Z。自动摘要可能存在误差；条件判断不代表已经发生，请点击原帖核对。</p></aside><div class="links"><a class="source" href="https://x.com/claudeai/status/2098138736642933143" target="_blank" rel="noopener noreferrer">查看 Claude 原帖 ↗</a></div></div></div><div class="page-tag">整理 2026-09-12 · 中央源 2026/9/11 14:40:01 北京时间</div></div></section></main><footer class="reading-footer"><a href="../index.html">浏览全部往期 →</a></footer></body></html>
